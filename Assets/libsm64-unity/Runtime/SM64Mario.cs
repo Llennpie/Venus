@@ -20,7 +20,7 @@ namespace LibSM64
         Interop.SM64MarioState[] states;
 
         GameObject marioRendererObject;
-        Mesh marioMesh;
+        public Mesh marioMesh;
         uint marioId;
 
         void OnEnable()
@@ -99,10 +99,10 @@ namespace LibSM64
 
             states[buffIndex] = Interop.MarioTick( marioId, inputs, positionBuffers[buffIndex], normalBuffers[buffIndex], colorBuffer, uvBuffer );
 
-            for( int i = 0; i < colorBuffer.Length; ++i )
-                colorBufferColors[i] = new Color( colorBuffer[i].x, colorBuffer[i].y, colorBuffer[i].z, 1 );
+            //for( int i = 0; i < colorBuffer.Length; ++i )
+            //    colorBufferColors[i] = new Color( colorBuffer[i].x, colorBuffer[i].y, colorBuffer[i].z, 1 );
 
-            marioMesh.colors = colorBufferColors;
+            //marioMesh.colors = colorBufferColors;
             marioMesh.uv = uvBuffer;
 
             buffIndex = 1 - buffIndex;
