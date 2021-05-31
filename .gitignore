@@ -2,6 +2,15 @@
 *.z64
 *.z64.meta
 
+# libsm64
+/libsm64/src/decomp/mario
+/libsm64/build/
+/libsm64/dist/
+/libsm64/test/level.c
+/libsm64/test/level.h
+/libsm64/run-test
+/libsm64/*.so
+
 # This .gitignore file should be placed at the root of your Unity project directory
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
