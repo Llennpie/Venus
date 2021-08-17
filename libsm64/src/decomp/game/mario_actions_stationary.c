@@ -126,7 +126,6 @@ s32 act_idle(struct MarioState *m) {
         return TRUE;
     }
 
-    /*
     if (m->actionState == 3) {
         if (m->floor != NULL && m->curTerrain == TERRAIN_SNOW) {
             return set_mario_action(m, ACT_SHIVERING, 0);
@@ -134,7 +133,10 @@ s32 act_idle(struct MarioState *m) {
             return set_mario_action(m, ACT_START_SLEEPING, 0);
         }
     }
-    */
+
+    // In Venus, Mario's idle animation cycle is replaced with his reading sign animation.
+    // This is generally the same animation but without the head rotations.
+    // To-do: Clean this up a little.
 
     if (m->actionArg & 1) {
         set_mario_animation(m, MARIO_ANIM_STAND_AGAINST_WALL);

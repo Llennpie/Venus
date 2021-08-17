@@ -67,6 +67,8 @@ public class ColorType : MonoBehaviour
             mario.customColors[5] = color;
         }
 
+        mario.UpdateColors();
+
         GetComponent<Image>().color = color;
         hexText.color = color;
         inputField.text = inputField.text.ToUpper();

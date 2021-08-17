@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using UnityEngine;
 
 namespace LibSM64
@@ -95,9 +95,17 @@ namespace LibSM64
             inputs.stickY = -joystick.y;
             inputs.buttonA = inputProvider.GetButtonHeld( SM64InputProvider.Button.Jump  ) ? (byte)1 : (byte)0;
             inputs.buttonB = inputProvider.GetButtonHeld( SM64InputProvider.Button.Kick  ) ? (byte)1 : (byte)0;
-            inputs.buttonZ = inputProvider.GetButtonHeld( SM64InputProvider.Button.Stomp ) ? (byte)1 : (byte)0;
+            //inputs.buttonZ = inputProvider.GetButtonHeld( SM64InputProvider.Button.Stomp ) ? (byte)1 : (byte)0;
+
+            if (Input.GetAxis("Z") != 0 || Input.GetButton("Z")) {
+                inputs.buttonZ = (byte)1;
+            } else {
+                inputs.buttonZ = (byte)0;
+            }
 
             states[buffIndex] = Interop.MarioTick( marioId, inputs, positionBuffers[buffIndex], normalBuffers[buffIndex], colorBuffer, uvBuffer );
+
+            states[buffIndex].eyeState = 4;
 
             //for( int i = 0; i < colorBuffer.Length; ++i )
             //    colorBufferColors[i] = new Color( colorBuffer[i].x, colorBuffer[i].y, colorBuffer[i].z, 1 );

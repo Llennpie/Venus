@@ -1796,7 +1796,7 @@ s32 execute_mario_action(UNUSED struct Object *o) {
  *                  INITIALIZATION                *
  **************************************************/
 
-void init_mario(void) {
+int init_mario(void) {
     //Vec3s capPos;
     //struct Object *capObject;
 
@@ -1833,14 +1833,18 @@ void init_mario(void) {
     gMarioState->area = gCurrentArea;
     gMarioState->marioObj = gMarioObject;
     gMarioState->marioObj->header.gfx.animInfo.animID = -1;
+
     vec3s_copy(gMarioState->faceAngle, gMarioSpawnInfo->startAngle);
     vec3s_set(gMarioState->angleVel, 0, 0, 0);
     vec3s_to_vec3f(gMarioState->pos, gMarioSpawnInfo->startPos);
     vec3f_set(gMarioState->vel, 0, 0, 0);
+
     gMarioState->floorHeight =
         find_floor(gMarioState->pos[0], gMarioState->pos[1], gMarioState->pos[2], &gMarioState->floor);
 
-    gMarioState->curTerrain = gMarioState->floor->terrain;
+    if (gMarioState->floor != NULL) {
+        gMarioState->curTerrain = gMarioState->floor->terrain;
+    }
 
     if (gMarioState->pos[1] < gMarioState->floorHeight) {
         gMarioState->pos[1] = gMarioState->floorHeight;
@@ -1879,6 +1883,8 @@ void init_mario(void) {
         capObject->oMoveAngleYaw = 0;
     }
 #endif
+
+    return gMarioState->floor != NULL ? 0 : -1;
 }
 
 void init_mario_from_save_file(void) {

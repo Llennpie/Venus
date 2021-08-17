@@ -13,20 +13,24 @@
 
 ## Installation
 
-### Ubuntu
+Venus has been tested on both Windows (using [MSYS2 64-bit](https://www.msys2.org/)) and Ubuntu.
 
-Install dependencies:
+First, install dependencies:
+
+#### Windows
 ```
-sudo apt install -y binutils-mips-linux-gnu build-essential git libcapstone-dev pkgconf python3
+pacman -S unzip make git mingw-w64-i686-gcc mingw-w64-x86_64-gcc mingw-w64-i686-glew mingw-w64-x86_64-glew mingw-w64-i686-SDL2 mingw-w64-i686-SDL mingw-w64-x86_64-SDL2 mingw-w64-x86_64-SDL python3
 ```
-Clone the repo from within the Linux shell:
+#### Ubuntu
 ```
-git clone https://github.com/Llennpie/Venus.git
+sudo apt install build-essential git python3 libglew-dev libsdl2-dev
+```
+
+Next, clone the project and build libsm64:
+
+```
+git clone https://github.com/Llennpie/Venus
 cd Venus
-```
-
-Build *libsm64*:
-```
 ./build-libsm64
 ```
 

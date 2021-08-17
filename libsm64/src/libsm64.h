@@ -49,6 +49,7 @@ struct SM64MarioState
     float velocity[3];
     float faceAngle;
     int16_t health;
+    int8_t eyeState;
 };
 
 struct SM64MarioGeometryBuffers
@@ -74,9 +75,9 @@ extern SM64_LIB_FN void sm64_global_terminate( void );
 
 extern SM64_LIB_FN void sm64_static_surfaces_load( const struct SM64Surface *surfaceArray, uint32_t numSurfaces );
 
-extern SM64_LIB_FN uint32_t sm64_mario_create( int16_t x, int16_t y, int16_t z );
-extern SM64_LIB_FN void sm64_mario_tick( uint32_t marioId, const struct SM64MarioInputs *inputs, struct SM64MarioState *outState, struct SM64MarioGeometryBuffers *outBuffers );
-extern SM64_LIB_FN void sm64_mario_delete( uint32_t marioId );
+extern SM64_LIB_FN int32_t sm64_mario_create( int16_t x, int16_t y, int16_t z );
+extern SM64_LIB_FN void sm64_mario_tick( int32_t marioId, const struct SM64MarioInputs *inputs, struct SM64MarioState *outState, struct SM64MarioGeometryBuffers *outBuffers );
+extern SM64_LIB_FN void sm64_mario_delete( int32_t marioId );
 
 extern SM64_LIB_FN uint32_t sm64_surface_object_create( const struct SM64SurfaceObject *surfaceObject );
 extern SM64_LIB_FN void sm64_surface_object_move( uint32_t objectId, const struct SM64ObjectTransform *transform );

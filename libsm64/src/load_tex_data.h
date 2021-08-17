@@ -27,6 +27,10 @@ enum MarioTextures
 
 #define NUM_USED_TEXTURES 11
 
+// The third offset (Mario's M cap logo) is normally "6288".
+// In Venus, this is replaced with "8337", which is an invisible 16x16 texture.
+// This makes color codes look better, while avoiding using any external texture assets.
+
 static const int mario_tex_offsets[NUM_USED_TEXTURES] = { 144, 4240, 8337, 8336, 10384, 12432, 14480, 16528, 30864, 32912, 37008 };
 static const int mario_tex_widths [NUM_USED_TEXTURES] = { 64, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32 };
 static const int mario_tex_heights[NUM_USED_TEXTURES] = { 32, 32, 32, 32, 32, 32, 32, 32, 32, 64, 64 };

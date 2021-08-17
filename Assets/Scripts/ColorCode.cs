@@ -23,18 +23,13 @@ public class ColorCode : MonoBehaviour
     {
         colors = new Color[3072];
         mario = GetComponent<SM64Mario>();
-    }
 
-    void Update()
-    {
-        // update colors every frame (for now)
-        // this will let us update customColors in realtime
-        // will change this in the future if i make a cc editor
+        // runs once to load initial colors
+        // this is called again whenever a color in the editor menu is updated
         UpdateColors();
-        mario.marioMesh.colors = colors;
     }
 
-    void UpdateColors()
+    public void UpdateColors()
     {
         for(int i = 0; i < 495; i++) {
             colors[i] = customColors[1];
@@ -75,5 +70,7 @@ public class ColorCode : MonoBehaviour
         for(int i = 2178; i < 2256; i++) {
             colors[i] = customColors[3];
         }
+
+        mario.marioMesh.colors = colors;
     }
 }

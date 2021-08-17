@@ -103,7 +103,7 @@ SM64_LIB_FN void sm64_global_terminate( void )
     {
         for( int i = 0; i < s_mario_instance_pool.size; ++i )
             if( s_mario_instance_pool.objects[i] != NULL )
-                global_state_delete( ((struct MarioInstance *)s_mario_instance_pool.objects[ i ])->globalState );
+                sm64_mario_delete( i );
 
         obj_pool_free_all( &s_mario_instance_pool );
     }
@@ -122,9 +122,9 @@ SM64_LIB_FN void sm64_static_surfaces_load( const struct SM64Surface *surfaceArr
     surfaces_load_static( surfaceArray, numSurfaces );
 }
 
-SM64_LIB_FN uint32_t sm64_mario_create( int16_t x, int16_t y, int16_t z )
+SM64_LIB_FN int32_t sm64_mario_create( int16_t x, int16_t y, int16_t z )
 {
-    uint32_t marioIndex = obj_pool_alloc_index( &s_mario_instance_pool, sizeof( struct MarioInstance ));
+    int32_t marioIndex = obj_pool_alloc_index( &s_mario_instance_pool, sizeof( struct MarioInstance ));
     struct MarioInstance *newInstance = s_mario_instance_pool.objects[marioIndex];
 
     newInstance->globalState = global_state_create();
@@ -158,14 +158,20 @@ SM64_LIB_FN uint32_t sm64_mario_create( int16_t x, int16_t y, int16_t z )
     gMarioSpawnInfoVal.next = NULL;
 
     init_mario_from_save_file();
-    init_mario();
+
+    if( init_mario() < 0 )
+    {
+        sm64_mario_delete( marioIndex );
+        return -1;
+    }
+
     set_mario_action( gMarioState, ACT_SPAWN_SPIN_AIRBORNE, 0);
     find_floor( x, y, z, &gMarioState->floor );
 
     return marioIndex;
 }
 
-SM64_LIB_FN void sm64_mario_tick( uint32_t marioId, const struct SM64MarioInputs *inputs, struct SM64MarioState *outState, struct SM64MarioGeometryBuffers *outBuffers )
+SM64_LIB_FN void sm64_mario_tick( int32_t marioId, const struct SM64MarioInputs *inputs, struct SM64MarioState *outState, struct SM64MarioGeometryBuffers *outBuffers )
 {
     if( marioId >= s_mario_instance_pool.size || s_mario_instance_pool.objects[marioId] == NULL )
     {
@@ -199,9 +205,10 @@ SM64_LIB_FN void sm64_mario_tick( uint32_t marioId, const struct SM64MarioInputs
     vec3f_copy( outState->position, gMarioState->pos );
     vec3f_copy( outState->velocity, gMarioState->vel );
     outState->faceAngle = (float)gMarioState->faceAngle[1] / 32768.0f * 3.14159f;
+    outState->eyeState = venus_eyeState;
 }
 
-SM64_LIB_FN void sm64_mario_delete( uint32_t marioId )
+SM64_LIB_FN void sm64_mario_delete( int32_t marioId )
 {
     if( marioId >= s_mario_instance_pool.size || s_mario_instance_pool.objects[marioId] == NULL )
     {

@@ -12,6 +12,7 @@ public class MachinimaCamera : MonoBehaviour
     [SerializeField] GameObject target = null;
     [SerializeField] float radius = 15;
     [SerializeField] float elevation = 5;
+    Vector3 currentCameraSpeed;
 
     void Start() {
         currentCameraMode = CameraMode.Normal;
@@ -44,7 +45,12 @@ public class MachinimaCamera : MonoBehaviour
             transform.LookAt(targetPos);
         }
         if (currentCameraMode == CameraMode.Fixed) {
-            // nothing yet   
+            if (Input.GetButton("L")) {
+                currentCameraSpeed = new Vector3 (0, Input.GetAxis("VerticalCam"), 0);
+            } else {
+                currentCameraSpeed = new Vector3 (Input.GetAxis("HorizontalCam"), 0, Input.GetAxis("VerticalCam"));
+            }
+            transform.Translate(currentCameraSpeed * Time.deltaTime * 25f);
         }
 
         if (Input.GetButtonDown("R")) {
