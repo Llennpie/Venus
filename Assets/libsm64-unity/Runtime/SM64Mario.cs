@@ -105,8 +105,6 @@ namespace LibSM64
 
             states[buffIndex] = Interop.MarioTick( marioId, inputs, positionBuffers[buffIndex], normalBuffers[buffIndex], colorBuffer, uvBuffer );
 
-            states[buffIndex].eyeState = 4;
-
             //for( int i = 0; i < colorBuffer.Length; ++i )
             //    colorBufferColors[i] = new Color( colorBuffer[i].x, colorBuffer[i].y, colorBuffer[i].z, 1 );
 
