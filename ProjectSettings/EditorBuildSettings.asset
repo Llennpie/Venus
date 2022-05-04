@@ -5,13 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Main.unity
-    guid: e2d35a3c05cb8ba49b539bab0088894a
   - enabled: 1
-    path: Assets/Test.unity
+    path: Assets/levels/intro/intro.unity
+    guid: 0b1da37909374ea44adf845d6c5e0e88
+  - enabled: 1
+    path: Assets/levels/castle_grounds/castle_grounds.unity
+    guid: 849793f9034a6834d82c1fca224ccd98
+  - enabled: 1
+    path: Assets/levels/test.unity
     guid: d1800f1d1b9cbdf418427e529e3c742e
-  - enabled: 0
-    path: Assets/Transparent.unity
-    guid: c7296129b3db3c34db06d2600559868e
   m_configObjects: {}
