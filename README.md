@@ -20,7 +20,7 @@ Head to the [Releases](https://github.com/Llennpie/Venus/releases) page and foll
 
 ## Compilation (advanced)
 
-Venus has been tested on both Windows (using [MSYS2 64-bit](https://www.msys2.org/)) and Ubuntu.
+Venus has been tested on both Windows (using [MSYS2 64-bit](https://www.msys2.org/)) and Ubuntu. You can compile the .dll or .so using the libsm64 repo and to do so:
 
 First, install dependencies:
 
@@ -33,12 +33,14 @@ pacman -S unzip make git mingw-w64-i686-gcc mingw-w64-x86_64-gcc mingw-w64-i686-
 sudo apt install build-essential git python3 libglew-dev libsdl2-dev
 ```
 
-Next, clone the project and build libsm64:
+Next, clone the project and build libsm64, after you do that paste the compiled file into the project.
 
 ```
-git clone https://github.com/Llennpie/Venus
-cd Venus
-./build-libsm64
+git clone https://github.com/libsm64/libsm64
+cd libsm64
+make lib
 ```
 
 In order to play/test the project, a prior copy of the game is required. Place a vanilla *Super Mario 64* US ROM into the repo's directory and rename it to `baserom.us.z64`. After building the Unity project, place another `baserom.us.z64` next to the executable.
+
+Make sure you also copy sm64extend.exe and assets.txt into the data folder of the Unity build so ROM asset extraction beyond Mario himself is fully possible.
